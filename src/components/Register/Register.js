@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import './register.css';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
-import { Link, useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 export default function Register() {
     const navigate = useNavigate();
@@ -18,51 +18,46 @@ export default function Register() {
         password: '',
     });
 
-    const createError = (text) => {
-        const error = document.createElement('div');
-        error.className = 'error';
-        error.textContent = text;
+    const [errors, setErrors] = useState({});
 
-        return error;
-    };
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
 
-    const validate = e => {
-        let isValid = false;
-        const inputContainer = document.querySelectorAll('.input-container');
+        setFormData({...formData, [name]: value});
+
+        if (value.trim() !== '') {
+            setErrors((prevErrors) => {
+                const updatedErrors = {...prevErrors};
+                delete updatedErrors[name];
+                return updatedErrors;
+            });
+        }
+    }
+
+    const validate = (e) => {
+        e.preventDefault();
+
+        const newErrors = {};
 
         if (!formData.login) {
-            e.preventDefault();
-            document.getElementById('login').style.borderColor = '#f00';
-
-            inputContainer[0].append(createError('Поле не может быть пустым'));
-            isValid = true;
+            newErrors.login = 'Поле не может быть пустым';
         }
 
         if (!formData.firstName) {
-            e.preventDefault();
-            document.getElementById('firstName').style.borderColor = '#f00';
-
-            inputContainer[1].append(createError('Поле не может быть пустым'));
-            isValid = true;
+            newErrors.firstName = 'Поле не может быть пустым';
         }
 
         if (!formData.lastName) {
-            e.preventDefault();
-            document.getElementById('lastName').style.borderColor = '#f00';
-
-            inputContainer[2].append(createError('Поле не может быть пустым'));
-            isValid = true;
+            newErrors.lastName = 'Поле не может быть пустым';
         }
 
         if (!formData.password) {
-            e.preventDefault();
-            document.getElementById('password').style.borderColor = '#f00';
-
-            inputContainer[3].append(createError('Поле не может быть пустым'));
-            isValid = true;
+            newErrors.password = 'Поле не может быть пустым';
         }
 
-        if (isValid) {
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length === 0) {
             navigate('/login');
         }
     };
@@ -73,30 +68,30 @@ export default function Register() {
             <form onSubmit={validate}>
                 <div className='input-container'>
                     <label htmlFor='login'>Логин</label>
-                    <Input type='text' name='login' id='login'
-                        value={formData.login}
-                        onChange={e => setFormData({ ...formData, login: e.target.value })} />
+                    <Input type='text' name='login' id='login' value={formData.login} onChange={handleInputChange}
+                           style={{borderColor: errors.login ? '#f00' : ''}}/>
+                    {errors.login && <div className="error">{errors.login}</div>}
                 </div>
 
                 <div className='input-container'>
                     <label htmlFor='firstName'>Имя</label>
-                    <Input type='text' name='firstName' id='firstName'
-                        value={formData.firstName}
-                        onChange={e => setFormData({ ...formData, firstName: e.target.value })} />
+                    <Input type='text' name='firstName' id='firstName' value={formData.firstName}
+                           onChange={handleInputChange} style={{borderColor: errors.firstName ? '#f00' : ''}}/>
+                    {errors.firstName && <div className="error">{errors.firstName}</div>}
                 </div>
 
                 <div className='input-container'>
                     <label htmlFor='lastName'>Фамилия</label>
-                    <Input type='text' name='lastName' id='lastName'
-                        value={formData.lastName}
-                        onChange={e => setFormData({ ...formData, lastName: e.target.value })} />
+                    <Input type='text' name='lastName' id='lastName' value={formData.lastName}
+                           onChange={handleInputChange} style={{borderColor: errors.lastName ? '#f00' : ''}}/>
+                    {errors.lastName && <div className="error">{errors.lastName}</div>}
                 </div>
 
                 <div className='input-container'>
                     <label htmlFor='password'>Пароль</label>
-                    <Input type='password' name='password' id='password'
-                        value={formData.password}
-                        onChange={e => setFormData({ ...formData, password: e.target.value })} />
+                    <Input type='password' name='password' id='password' value={formData.password}
+                           onChange={handleInputChange} style={{borderColor: errors.password ? '#f00' : ''}}/>
+                    {errors.password && <div className="error">{errors.password}</div>}
                 </div>
 
                 <Button type='submit'>Зарегистрироваться</Button>

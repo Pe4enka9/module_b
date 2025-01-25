@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import '../Register/register.css';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
-export default function Login() {
+export default function Register() {
+    const navigate = useNavigate();
+
     useEffect(() => {
         document.title = 'Вход';
     }, []);
@@ -14,29 +16,39 @@ export default function Login() {
         password: '',
     });
 
-    const createError = (text) => {
-        const error = document.createElement('div');
-        error.className = 'error';
-        error.textContent = text;
+    const [errors, setErrors] = useState({});
 
-        return error;
-    };
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
 
-    const validate = e => {
-        const inputContainer = document.querySelectorAll('.input-container');
+        setFormData({...formData, [name]: value});
+
+        if (value.trim() !== '') {
+            setErrors((prevErrors) => {
+                const updatedErrors = {...prevErrors};
+                delete updatedErrors[name];
+                return updatedErrors;
+            });
+        }
+    }
+
+    const validate = (e) => {
+        e.preventDefault();
+
+        const newErrors = {};
 
         if (!formData.login) {
-            e.preventDefault();
-            document.getElementById('login').style.borderColor = '#f00';
-
-            inputContainer[0].append(createError('Поле не может быть пустым'));
+            newErrors.login = 'Поле не может быть пустым';
         }
 
         if (!formData.password) {
-            e.preventDefault();
-            document.getElementById('password').style.borderColor = '#f00';
+            newErrors.password = 'Поле не может быть пустым';
+        }
 
-            inputContainer[1].append(createError('Поле не может быть пустым'));
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length === 0) {
+            navigate('/');
         }
     };
 
@@ -46,16 +58,16 @@ export default function Login() {
             <form onSubmit={validate}>
                 <div className='input-container'>
                     <label htmlFor='login'>Логин</label>
-                    <Input type='text' name='login' id='login'
-                        value={formData.login}
-                        onChange={e => setFormData({ ...formData, login: e.target.value })} />
+                    <Input type='text' name='login' id='login' value={formData.login} onChange={handleInputChange}
+                           style={{borderColor: errors.login ? '#f00' : ''}}/>
+                    {errors.login && <div className="error">{errors.login}</div>}
                 </div>
 
                 <div className='input-container'>
                     <label htmlFor='password'>Пароль</label>
-                    <Input type='password' name='password' id='password'
-                        value={formData.password}
-                        onChange={e => setFormData({ ...formData, password: e.target.value })} />
+                    <Input type='password' name='password' id='password' value={formData.password}
+                           onChange={handleInputChange} style={{borderColor: errors.password ? '#f00' : ''}}/>
+                    {errors.password && <div className="error">{errors.password}</div>}
                 </div>
 
                 <Button type='submit'>Войти</Button>

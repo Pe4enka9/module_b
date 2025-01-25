@@ -1,11 +1,7 @@
 import './list_file.css';
 import Button from '../Button/Button';
 
-export default function ListFile({ title, id }) {
-    const handleDelete = id => {
-        
-    };
-
+export default function ListFile({title, id, onClick}) {
     return (
         <div className='file'>
             <div className='file__img'></div>
@@ -15,7 +11,7 @@ export default function ListFile({ title, id }) {
 
             <div className='file__buttons'>
                 <Button>Редактировать</Button>
-                <Button onClick={() => handleDelete({id})}>Удалить</Button>
+                <Button onClick={() => onClick(id)}>Удалить</Button>
                 <Button>Изменить права</Button>
             </div>
         </div>
