@@ -1,0 +1,36 @@
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+}
+
+.link {
+    color: #000;
+
+    font-size: 1.8rem;
+    font-weight: 400;
+
+    text-decoration: none;
+    position: relative;
+}
+
+.link::after {
+    width: 0;
+    height: .3rem;
+
+    background-color: var(--darkAccent);
+
+    display: block;
+
+    border-radius: .5rem;
+
+    content: '';
+    transition: width .3s ease-in-out;
+    position: absolute;
+    bottom: -.3rem;
+    left: 0;
+}
+
+.link:hover::after {
+    width: 100%;
+}

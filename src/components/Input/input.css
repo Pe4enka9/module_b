@@ -1,0 +1,17 @@
+input {
+    width: 30rem;
+
+    padding: .5em .7em;
+
+    outline: none;
+    border: .2rem solid #ccc;
+    border-radius: 1rem;
+
+    font-size: 1.8rem;
+
+    transition: border-color .2s ease-in-out;
+}
+
+input:focus {
+    border-color: var(--main);
+}

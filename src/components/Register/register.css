@@ -1,0 +1,44 @@
+.register {
+    width: 80%;
+    margin: 0 auto;
+}
+
+form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.input-container {
+    margin-bottom: 1.5rem;
+
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .5rem;
+}
+
+.input-container label {
+    font-size: 1.6rem;
+}
+
+.register button {
+    margin-bottom: 1.5rem;
+}
+
+.register form > div:last-child {
+    font-size: 1.6rem;
+}
+
+.register div a {
+    color: #00f;
+
+    font-size: inherit;
+
+    text-decoration: none;
+}
+
+.error {
+    color: #f00;
+
+    font-size: 1.4rem;
+}

@@ -1,0 +1,10 @@
+.list-files {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.list-files__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+    grid-gap: 3rem;
+}

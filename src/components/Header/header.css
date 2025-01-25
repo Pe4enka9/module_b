@@ -1,0 +1,10 @@
+header {
+    padding: 2rem;
+
+    background-color: var(--main);
+}
+
+.header-container {
+    width: 80%;
+    margin: 0 auto;
+}

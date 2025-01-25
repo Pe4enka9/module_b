@@ -1,0 +1,35 @@
+.file {
+    padding: 2rem 2.5rem;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 1.5rem;
+
+    border: .2rem solid var(--darkAccent);
+    border-radius: 1rem;
+}
+
+.file__img {
+    width: 10rem;
+    height: 10rem;
+
+    background: #ccc;
+
+    border-radius: 1rem;
+}
+
+.file__buttons {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.file__buttons button:first-child {
+    background-color: var(--main);
+}
+
+.file__buttons button:last-child {
+    background-color: var(--darkBackground);
+}
