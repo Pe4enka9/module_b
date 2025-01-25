@@ -1,5 +1,6 @@
 import './list_file.css';
 import Button from '../Button/Button';
+import {Link} from "react-router-dom";
 
 export default function ListFile({title, id, onClick}) {
     return (
@@ -10,7 +11,9 @@ export default function ListFile({title, id, onClick}) {
             <h3>Идентификатор: {id}</h3>
 
             <div className='file__buttons'>
-                <Button>Редактировать</Button>
+                <Link to={`/edit/${id}`}>
+                    <Button>Редактировать</Button>
+                </Link>
                 <Button onClick={() => onClick(id)}>Удалить</Button>
                 <Button>Изменить права</Button>
             </div>

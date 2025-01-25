@@ -1,0 +1,21 @@
+.edit-file {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.edit-file h1 {
+    margin-bottom: 4rem;
+}
+
+.edit-file__buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.edit-file__buttons button:first-child {
+    background-color: var(--main);
+}
+
+.edit-file__buttons button:first-child:hover {
+    background-color: #569cd3;
+}

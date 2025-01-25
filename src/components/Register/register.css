@@ -17,10 +17,6 @@ form {
     gap: .5rem;
 }
 
-.input-container label {
-    font-size: 1.6rem;
-}
-
 .register button {
     margin-bottom: 1.5rem;
 }

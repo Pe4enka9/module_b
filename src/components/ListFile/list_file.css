@@ -30,6 +30,14 @@
     background-color: var(--main);
 }
 
-.file__buttons button:last-child {
+.file__buttons button:first-child:hover {
+    background-color: #569cd3;
+}
+
+.file__buttons > button:last-child {
     background-color: var(--darkBackground);
+}
+
+.file__buttons > button:last-child:hover {
+    background-color: #603c44;
 }

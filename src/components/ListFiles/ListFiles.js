@@ -7,27 +7,31 @@ export default function ListFiles() {
         document.title = 'Ваши файлы';
     }, []);
 
-    const [files, setFiles] = useState([
-        {
-            title: 'Название',
-            id: 1,
-        },
-        {
-            title: 'Название',
-            id: 2,
-        },
-        {
-            title: 'Название',
-            id: 3,
-        },
-        {
-            title: 'Название',
-            id: 4,
-        },
-    ]);
+    const [files, setFiles] = useState([]);
+
+    useEffect(() => {
+        const storedFiles = localStorage.getItem('files');
+
+        if (storedFiles) {
+            setFiles(JSON.parse(storedFiles));
+        } else {
+            setFiles([
+                {title: 'Название', id: 1,},
+                {title: 'Название', id: 2,},
+                {title: 'Название', id: 3,},
+                {title: 'Название', id: 4,},
+            ]);
+        }
+    }, []);
+
+    const saveToLocalStorage = (updatedFiles) => {
+        localStorage.setItem('files', JSON.stringify(updatedFiles));
+    };
 
     const handleDeleteFile = (id) => {
-        setFiles(files.filter(file => file.id !== id));
+        const updatedFiles = files.filter(file => file.id !== id);
+        setFiles(updatedFiles);
+        saveToLocalStorage(updatedFiles);
     };
 
     return (

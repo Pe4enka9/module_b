@@ -36,3 +36,7 @@ h3 {
 .list-files h1 {
     margin-bottom: 4rem;
 }
+
+.input-container label {
+    font-size: 1.6rem;
+}
